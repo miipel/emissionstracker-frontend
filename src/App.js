@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.css'
-import { Container, Box, Title, Input, Checkbox } from 'bloomer';
+import { Container, Box, Title, Input, Checkbox, Content } from 'bloomer';
 
 import emissionsService from './services/emissions'
 import populationService from './services/populations'
-
+import EmissionsTable from './components/table'
 
 class App extends Component {
   state = {
-    emissions: {},
-    populations: {}
+    emissions: [],
+    populations: []
   }
 
   componentDidMount() {
@@ -21,14 +21,41 @@ class App extends Component {
     })
   }
 
+  // combineDataset = () => {
+  //   let dataSet = {...this.state.emissions, ...this.state.populations}
+  //   return dataSet
+  // }
+
   render() {
+    const testData = [{
+      key: 'ABW',
+      location: 'Aruba',
+      year: '1987',
+      emissions: '447.374',
+      population: '61833'
+    },
+    {
+      key: 'ABW',
+      location: 'Aruba',
+      year: '1988',
+      emissions: '612.389',
+      population: '61079'
+    }]
     return (
-      <Container>
-        <Title isSize={1}>Emissions tracker</Title>
+      <Container isFluid style={{ marginTop: '20px', padding: '60px' }}>
+        <Title isSize={3}>Emissions tracker</Title>
         <Input type="text" placeholder='Country name' />
-        <Checkbox> Population </Checkbox>
-        <Checkbox> Emissions </Checkbox>
-        <Box>Hello world!</Box>
+        <Container style={{ padding: '5px' }}>
+          <Checkbox> Population </Checkbox>
+          <Checkbox> Emissions </Checkbox>
+        </Container>
+        <Container>
+          <Box>
+            <Content>
+              <EmissionsTable data={Array.from(testData)} />
+            </Content>
+          </Box>
+        </Container>
       </Container>
     );
   }
