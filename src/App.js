@@ -1,26 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'bulma/css/bulma.css'
+import { Container, Box, Title, Input, Checkbox } from 'bloomer';
+
+import emissionsService from './services/emissions'
+import populationService from './services/populations'
+
 
 class App extends Component {
+  state = {
+    emissions: {},
+    populations: {}
+  }
+
+  componentDidMount() {
+    emissionsService.getAll().then(response => {
+      this.setState({ emissions: response })
+    })
+    populationService.getAll().then(response => {
+      this.setState({ populations: response })
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Container>
+        <Title isSize={1}>Emissions tracker</Title>
+        <Input type="text" placeholder='Country name' />
+        <Checkbox> Population </Checkbox>
+        <Checkbox> Emissions </Checkbox>
+        <Box>Hello world!</Box>
+      </Container>
     );
   }
 }
