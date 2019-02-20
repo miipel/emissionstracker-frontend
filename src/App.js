@@ -4,12 +4,14 @@ import { Container, Box, Title, Input, Checkbox, Content } from 'bloomer';
 
 import emissionsService from './services/emissions'
 import populationService from './services/populations'
-import EmissionsTable from './components/table'
+import EmissionsTable from './components/emissionsTable'
 
 class App extends Component {
   state = {
     emissions: [],
-    populations: []
+    populations: [],
+    sortByEmissions: true,
+    sortByPopulation: false
   }
 
   componentDidMount() {
