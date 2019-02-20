@@ -9,8 +9,8 @@ class EmissionsTable extends Component {
   }
 
   sortByEmissions(a, b, sortByEmissions) {
-    const arg1 = a.emissions
-    const arg2 = b.emissions
+    const arg1 = a.population
+    const arg2 = b.population
     if(sortByEmissions) {
       return arg2 - arg1
     } else {
@@ -22,9 +22,10 @@ class EmissionsTable extends Component {
     const emissionsData = this.props.data.sort(
       (a, b) => this.sortByEmissions(a, b, this.state.sortByEmissions)
     )
-      .map((entry) => {
+      .map((entry, id) => {
         return <TableRow
-          key={entry.emissions + entry.population}
+          key={id}
+          locationKey={entry.key}
           location={entry.location}
           year={entry.year}
           emissions={entry.emissions}
@@ -35,6 +36,7 @@ class EmissionsTable extends Component {
       <Table isBordered isStriped>
         <thead>
           <tr>
+            <th>Key</th>
             <th>Location</th>
             <th>Year</th>
             <th>Emissions</th>
