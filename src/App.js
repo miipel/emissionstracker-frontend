@@ -25,6 +25,7 @@ class App extends Component {
     })
   }
 
+  // FIXME: This could be done in the back end
   combineArrays = (array1, array2) => {
     let array1Values = Object.values(array1)
     let array2Values = Object.values(array2)
